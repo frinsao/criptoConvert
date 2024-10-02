@@ -11,7 +11,6 @@ import SwiftData
 struct ContentView: View {
     
     var body: some View {
-        
         Color.customGray
             .edgesIgnoringSafeArea(.all)
             .overlay {
