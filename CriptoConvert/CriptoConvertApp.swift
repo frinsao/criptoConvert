@@ -11,8 +11,7 @@ import SwiftData
 @main
 struct CriptoConvertApp: App {
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-        ])
+        let schema = Schema([])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {

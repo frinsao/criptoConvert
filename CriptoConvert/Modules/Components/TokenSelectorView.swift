@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TokenSelectorView: View {
     
-    private let tokens: [String] = ["BTC", "ETH", "XRP", "LTC"]
+    private let tokens: [String] = ["BTC", "ETH", "XRP", "LTC"] // TODO: - Remove mocks
     @State private var selectedToken = "BTC"
     @State private var amount: Double = 0.0
     
@@ -46,7 +46,6 @@ struct TokenSelectorView: View {
                             .multilineTextAlignment(.trailing)
                             .foregroundStyle(.black)
                     }
-                
             }
         }
     }
