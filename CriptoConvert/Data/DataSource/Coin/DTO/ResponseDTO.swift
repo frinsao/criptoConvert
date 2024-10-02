@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Response: Codable {
+struct ResponseDTO: Codable {
     let data: [CoinDTO]
     let timestamp: Int
 }
