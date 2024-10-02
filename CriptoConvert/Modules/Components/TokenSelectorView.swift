@@ -18,6 +18,7 @@ struct TokenSelectorView: View {
             Text("Ammount")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(.customGrayDark)
+                .font(.callout)
             
             HStack {
                 Image("defaultImage")
@@ -34,7 +35,7 @@ struct TokenSelectorView: View {
                 }
                 .pickerStyle(.menu)
                 .tint(.primaryBlue)
-                
+
                 Spacer()
                 
                 RoundedRectangle(cornerRadius: 8)
@@ -45,6 +46,7 @@ struct TokenSelectorView: View {
                             .padding(20)
                             .multilineTextAlignment(.trailing)
                             .foregroundStyle(.black)
+                            .bold()
                     }
                 
             }
