@@ -1,5 +1,5 @@
 //
-//  ContentViewModel.swift
+//  HomeViewModel.swift
 //  CriptoConvert
 //
 //  Created by Jesu Castellano on 3/10/24.
@@ -9,9 +9,9 @@ import Foundation
 
 
 @Observable
-class ContentViewModel: ContentViewModelProtocol {
+class HomeViewModel: HomeViewModelProtocol {
     
-        let coinUseCase: CoinUseCase
+    let coinUseCase: CoinUseCase
     
     init(coinUseCase: CoinUseCase) {
         self.coinUseCase = coinUseCase

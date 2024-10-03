@@ -18,9 +18,7 @@ class CoinUseCase: CoinUseCaseProtocol {
     init(coinRepository: CoinRepositoryProtocol) {
         self.coinRepository = coinRepository
     }
-}
-
-extension CoinUseCase {
+    
     func fetchCoins() async throws -> [Coin] {
         return try await coinRepository.getRemoteCoins()
     }

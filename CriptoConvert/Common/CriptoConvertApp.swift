@@ -23,7 +23,7 @@ struct CriptoConvertApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentBuilder().build()
+            HomeBuilder().build()
         }
         .modelContainer(sharedModelContainer)
     }

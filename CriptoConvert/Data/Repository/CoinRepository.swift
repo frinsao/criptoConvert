@@ -7,9 +7,6 @@
 
 import Foundation
 
-protocol CoinRepositoryProtocol {
-    func getRemoteCoins() async throws -> [Coin]
-}
 
 class CoinRepository: CoinRepositoryProtocol {
     
@@ -20,7 +17,11 @@ class CoinRepository: CoinRepositoryProtocol {
     }
     
     func getRemoteCoins() async throws -> [Coin] {
-        return try await coinDataSource.fetchCoins().data.compactMap({$0.toDomain()})
+        do {
+            return try await coinDataSource.fetchCoins().data.compactMap({$0.toDomain()})
+        } catch {
+            throw error
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HomeView.swift
 //  CriptoConvert
 //
 //  Created by Jesu Castellano on 1/10/24.
@@ -8,9 +8,9 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct HomeView: View {
     
-    var viewModel: ContentViewModelProtocol
+    var viewModel: HomeViewModelProtocol
     
     var body: some View {
         Color.customGray
@@ -104,5 +104,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentBuilder().build()
+    HomeBuilder().build()
 }
