@@ -8,5 +8,7 @@
 import Foundation
 
 protocol HomeViewModelProtocol {
+    var coins: [Coin] { get }
     
+    func fillCoins()
 }

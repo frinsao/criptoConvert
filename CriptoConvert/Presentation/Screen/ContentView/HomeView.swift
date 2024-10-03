@@ -28,6 +28,9 @@ struct HomeView: View {
                 }
                 .padding(24)
             }
+            .task {
+                viewModel.fillCoins()
+            }
     }
     
     var header: some View {
@@ -48,13 +51,13 @@ struct HomeView: View {
         RoundedRectangle(cornerRadius: 15)
             .overlay {
                 VStack(spacing: 12) {
-                    TokenSelectorView()
+                    TokenSelectorView(tokens: viewModel.coins)
                         .frame(height: 80)
                     
                     switchTokensView
                         .frame(height: 50)
                     
-                    TokenSelectorView()
+                    TokenSelectorView(tokens: viewModel.coins)
                         .frame(height: 80)
                 }
                 .padding(20)

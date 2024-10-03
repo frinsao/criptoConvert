@@ -11,9 +11,18 @@ import Foundation
 @Observable
 class HomeViewModel: HomeViewModelProtocol {
     
-    let useCase: CoinUseCase
+    var coins: [Coin] = []
+    private let useCase: CoinUseCase
     
     init(coinUseCase: CoinUseCase) {
         self.useCase = coinUseCase
+    }
+    
+    func fillCoins() {
+        Task {
+            do {
+                self.coins = try await useCase.fetchCoins()
+            }
+        }
     }
 }
