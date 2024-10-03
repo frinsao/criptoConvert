@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol CoinUseCaseProtocol {
-    func fetchCoins() async throws -> [Coin]
-}
-
 class CoinUseCase: CoinUseCaseProtocol {
     
     let coinRepository: CoinRepositoryProtocol
