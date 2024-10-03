@@ -10,15 +10,15 @@ import Foundation
 
 class CoinRepository: CoinRepositoryProtocol {
     
-    let coinDataSource: CoinDataSourceProtocol
+    let dataSource: CoinDataSourceProtocol
     
     init(coinDataSource: CoinDataSourceProtocol) {
-        self.coinDataSource = coinDataSource
+        self.dataSource = coinDataSource
     }
     
     func getRemoteCoins() async throws -> [Coin] {
         do {
-            return try await coinDataSource.fetchCoins().data.compactMap({$0.toDomain()})
+            return try await dataSource.fetchCoins().data.compactMap({$0.toDomain()})
         } catch {
             throw error
         }

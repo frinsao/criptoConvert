@@ -11,9 +11,9 @@ import Foundation
 @Observable
 class HomeViewModel: HomeViewModelProtocol {
     
-    let coinUseCase: CoinUseCase
+    let useCase: CoinUseCase
     
     init(coinUseCase: CoinUseCase) {
-        self.coinUseCase = coinUseCase
+        self.useCase = coinUseCase
     }
 }
