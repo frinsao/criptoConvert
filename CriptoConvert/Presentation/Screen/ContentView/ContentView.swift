@@ -10,6 +10,8 @@ import SwiftData
 
 struct ContentView: View {
     
+    var viewModel: ContentViewModelProtocol
+    
     var body: some View {
         Color.customGray
             .edgesIgnoringSafeArea(.all)
@@ -102,5 +104,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentBuilder().build()
 }
