@@ -10,7 +10,7 @@ import SwiftUI
 struct TokenSelectorView: View {
     
     let tokens: [Coin] // TODO: - Remove mocks
-    @State private var selectedToken = "BTC"
+    @Binding var selectedToken: Coin
     @State private var amount: Double = 0.0
     
     var body: some View {
@@ -27,10 +27,11 @@ struct TokenSelectorView: View {
                     .frame(width: 50, height: 50)
                     .clipShape(Capsule())
                 
-                Picker("", selection: $selectedToken ) {
+                Picker("", selection: $selectedToken.symbol ) {
                     ForEach(tokens, id: \.id) { token in
                         Text(token.symbol)
                             .foregroundStyle(.primaryBlue)
+                            .tag(token.symbol)
                     }
                 }
                 .pickerStyle(.menu)
@@ -55,5 +56,5 @@ struct TokenSelectorView: View {
 
 #Preview {
     let mock = Mock().getCoins()
-    TokenSelectorView(tokens: mock)
+    TokenSelectorView(tokens: mock, selectedToken: .constant(mock[0]))
 }
