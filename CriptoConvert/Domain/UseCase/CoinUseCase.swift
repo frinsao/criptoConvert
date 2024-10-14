@@ -9,13 +9,13 @@ import Foundation
 
 class CoinUseCase: CoinUseCaseProtocol {
     
-    let coinRepository: CoinRepositoryProtocol
+    let repository: CoinRepositoryProtocol
     
     init(coinRepository: CoinRepositoryProtocol) {
-        self.coinRepository = coinRepository
+        self.repository = coinRepository
     }
     
     func fetchCoins() async throws -> [Coin] {
-        return try await coinRepository.getRemoteCoins()
+        return try await repository.getRemoteCoins()
     }
 }

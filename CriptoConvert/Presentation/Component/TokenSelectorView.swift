@@ -11,7 +11,7 @@ struct TokenSelectorView: View {
     
     let tokens: [Coin] // TODO: - Remove mocks
     @Binding var selectedToken: Coin
-    @State private var selectedCoin = ""
+    @State private var selectedCoinSymbol = ""
     
     var body: some View {
         VStack {
@@ -37,7 +37,7 @@ struct TokenSelectorView: View {
     }
     
     var pickerView: some View {
-        Picker("", selection: $selectedCoin) {
+        Picker("", selection: $selectedCoinSymbol) {
             ForEach(tokens, id: \.id) { token in
                 Text(token.symbol)
                     .foregroundStyle(.primaryBlue)
@@ -46,7 +46,7 @@ struct TokenSelectorView: View {
         }
         .pickerStyle(.menu)
         .tint(.primaryBlue)
-        .onChange(of: selectedCoin) { value in
+        .onChange(of: selectedCoinSymbol) { value in
             updateSelectedToken(with: value)
         }
     }
@@ -65,10 +65,10 @@ struct TokenSelectorView: View {
     }
     
     private func updateSelectedToken(with symbol: String) {
-            if let newToken = tokens.first(where: { $0.symbol == symbol }) {
-                selectedToken = newToken
-            }
+        if let newToken = tokens.first(where: { $0.symbol == symbol }) {
+            selectedToken = newToken
         }
+    }
 }
 
 #Preview {
