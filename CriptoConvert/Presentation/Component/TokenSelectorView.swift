@@ -11,7 +11,7 @@ struct TokenSelectorView: View {
     
     let tokens: [Coin] // TODO: - Remove mocks
     @Binding var selectedToken: Coin
-    @State private var amount: Double = 0.0
+    @State private var selectedCoin = ""
     
     var body: some View {
         VStack {
@@ -27,31 +27,48 @@ struct TokenSelectorView: View {
                     .frame(width: 50, height: 50)
                     .clipShape(Capsule())
                 
-                Picker("", selection: $selectedToken.symbol ) {
-                    ForEach(tokens, id: \.id) { token in
-                        Text(token.symbol)
-                            .foregroundStyle(.primaryBlue)
-                            .tag(token.symbol)
-                    }
-                }
-                .pickerStyle(.menu)
-                .tint(.primaryBlue)
-
+                pickerView
+                
                 Spacer()
                 
-                RoundedRectangle(cornerRadius: 8)
-                    .foregroundStyle(.customGray)
-                    .frame(width: 150, height: 45)
-                    .overlay {
-                        TextField(value: $amount, format: .number, label: {})
-                            .padding(20)
-                            .multilineTextAlignment(.trailing)
-                            .foregroundStyle(.black)
-                            .bold()
-                    }
+                priceView
             }
         }
     }
+    
+    var pickerView: some View {
+        Picker("", selection: $selectedCoin) {
+            ForEach(tokens, id: \.id) { token in
+                Text(token.symbol)
+                    .foregroundStyle(.primaryBlue)
+                    .tag(token.symbol)
+            }
+        }
+        .pickerStyle(.menu)
+        .tint(.primaryBlue)
+        .onChange(of: selectedCoin) { value in
+            updateSelectedToken(with: value)
+        }
+    }
+    
+    var priceView: some View {
+        RoundedRectangle(cornerRadius: 8)
+            .foregroundStyle(.customGray)
+            .frame(width: 150, height: 45)
+            .overlay {
+                Text(selectedToken.priceUsd ?? "")
+                    .padding(20)
+                    .multilineTextAlignment(.trailing)
+                    .foregroundStyle(.black)
+                    .bold()
+            }
+    }
+    
+    private func updateSelectedToken(with symbol: String) {
+            if let newToken = tokens.first(where: { $0.symbol == symbol }) {
+                selectedToken = newToken
+            }
+        }
 }
 
 #Preview {
