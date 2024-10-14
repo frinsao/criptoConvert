@@ -10,7 +10,7 @@ import Foundation
 class Coin {
     let id: String
     let rank: String
-    let symbol: String
+    var symbol: String
     let name: String
     let supply: String?
     let marketCapUsd: String?
