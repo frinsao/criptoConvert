@@ -10,7 +10,7 @@ import SwiftData
 
 struct HomeView: View {
     
-    @State var viewModel: HomeViewModelProtocol
+    var viewModel: HomeViewModelProtocol
     
     var body: some View {
         Color.customGray
@@ -51,13 +51,17 @@ struct HomeView: View {
         RoundedRectangle(cornerRadius: 15)
             .overlay {
                 VStack(spacing: 12) {
-                    TokenSelectorView(tokens: viewModel.coins, selectedToken: $viewModel.firstSelectedToken)
+                    TokenSelectorView(tokens: viewModel.coins,
+                                      selectedToken: viewModel.firstSelectedCoin,
+                                      onChange: viewModel.updateFirstSelectedCoin(_:))
                         .frame(height: 80)
                     
                     switchTokensView
                         .frame(height: 50)
                     
-                    TokenSelectorView(tokens: viewModel.coins, selectedToken: $viewModel.secondSelectedToken)
+                    TokenSelectorView(tokens: viewModel.coins,
+                                      selectedToken: viewModel.secondSelectedCoin,
+                                      onChange: viewModel.updateSecondSelectedCoin(_:))
                         .frame(height: 80)
                 }
                 .padding(20)

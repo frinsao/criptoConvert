@@ -7,10 +7,8 @@
 
 import Foundation
 
-class Mock {
-    
-    init() {}
-    
+class CoinMock {
+
     func getCoins() -> [Coin] {
         return [
             Coin(

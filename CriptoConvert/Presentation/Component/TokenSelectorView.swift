@@ -9,12 +9,22 @@ import SwiftUI
 
 struct TokenSelectorView: View {
     
-    let tokens: [Coin] // TODO: - Remove mocks
-    @Binding var selectedToken: Coin
-    @State private var selectedCoinSymbol = ""
-    
+    let coins: [Coin]
+    let selectedCoin: Coin?
+    let onChange: (Coin) -> Void
+    @State private var selectedCoinSymbol: String
+
+    init(coins: [Coin], selectedCoins: Coin?, onChange: @escaping (Coin) -> Void) {
+        self.coins = coins
+        self.selectedCoin = selectedCoins
+        self.onChange = onChange
+        self.selectedCoinSymbol = selectedCoin?.symbol ?? ""
+    }
+
     var body: some View {
+
         VStack {
+            
             Text("Ammount")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(.customGrayDark)
@@ -33,12 +43,17 @@ struct TokenSelectorView: View {
                 
                 priceView
             }
+        }.task {
+            if selectedCoinSymbol.isEmpty {
+
+            }
+            print(selectedCoin?.symbol ?? "")
         }
     }
     
     var pickerView: some View {
         Picker("", selection: $selectedCoinSymbol) {
-            ForEach(tokens, id: \.id) { token in
+            ForEach(coins, id: \.id) { token in
                 Text(token.symbol)
                     .foregroundStyle(.primaryBlue)
                     .tag(token.symbol)
@@ -46,7 +61,7 @@ struct TokenSelectorView: View {
         }
         .pickerStyle(.menu)
         .tint(.primaryBlue)
-        .onChange(of: selectedCoinSymbol) { value in
+        .onChange(of: selectedCoinSymbol) { value, _ in
             updateSelectedToken(with: value)
         }
     }
@@ -56,7 +71,7 @@ struct TokenSelectorView: View {
             .foregroundStyle(.customGray)
             .frame(width: 150, height: 45)
             .overlay {
-                Text(selectedToken.priceUsd ?? "")
+                Text(selectedCoin?.priceUsd ?? "")
                     .padding(20)
                     .multilineTextAlignment(.trailing)
                     .foregroundStyle(.black)
@@ -65,13 +80,13 @@ struct TokenSelectorView: View {
     }
     
     private func updateSelectedToken(with symbol: String) {
-        if let newToken = tokens.first(where: { $0.symbol == symbol }) {
-            selectedToken = newToken
+        if let newToken = coins.first(where: { $0.symbol == symbol }) {
+            onChange(newToken)
         }
     }
 }
 
 #Preview {
-    let mock = Mock().getCoins()
-    TokenSelectorView(tokens: mock, selectedToken: .constant(mock[0]))
+    let mock = CoinMock().getCoins()
+    TokenSelectorView(tokens: mock, selectedToken: mock[0], onChange: { _ in })
 }

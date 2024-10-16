@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class CoinDataSource: CoinDataSourceProtocol {
-    
+final class CoinRemoteDataSource: CoinRemoteDataSourceProtocol {
+
     let network: Network
     
     init(network: Network) {
@@ -16,7 +16,6 @@ final class CoinDataSource: CoinDataSourceProtocol {
     }
     
     func fetchCoins() async throws -> ResponseDTO {
-        let response = try await network.getRequest("/v2/assets", type: ResponseDTO.self)
-        return response
+        return try await network.getRequest("/v2/assets", type: ResponseDTO.self)
     }
 }

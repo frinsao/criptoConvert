@@ -7,35 +7,34 @@
 
 import Foundation
 
-
 class CoinRepository: CoinRepositoryProtocol {
-    
-    let dataSource: CoinDataSourceProtocol
-    
-    init(coinDataSource: CoinDataSourceProtocol) {
-        self.dataSource = coinDataSource
+    let dataSource: CoinRemoteDataSourceProtocol
+
+    init(coinRemoteDataSource: CoinRemoteDataSourceProtocol) {
+        self.dataSource = coinRemoteDataSource
     }
-    
+
     func getRemoteCoins() async throws -> [Coin] {
         do {
-            return try await dataSource.fetchCoins().data.compactMap({$0.toDomain()})
+            return try await dataSource.fetchCoins().data.compactMap { $0.toDomain() }
         } catch {
+            // TODO: - ERROR HANDLER
             throw error
         }
     }
 }
 
-fileprivate extension CoinDTO {
+private extension CoinDTO {
     func toDomain() -> Coin {
-        return Coin(id: self.id,
-                    rank: self.rank,
-                    symbol: self.symbol,
-                    name: self.name,
-                    supply: self.supply,
-                    marketCapUsd: self.marketCapUsd,
-                    volumeUsd24Hr: self.volumeUsd24Hr,
-                    priceUsd: self.priceUsd,
-                    changePercent24Hr: self.changePercent24Hr,
-                    explorer: self.explorer)
+        return Coin(id: id,
+                    rank: rank,
+                    symbol: symbol,
+                    name: name,
+                    supply: supply,
+                    marketCapUsd: marketCapUsd,
+                    volumeUsd24Hr: volumeUsd24Hr,
+                    priceUsd: priceUsd,
+                    changePercent24Hr: changePercent24Hr,
+                    explorer: explorer)
     }
 }

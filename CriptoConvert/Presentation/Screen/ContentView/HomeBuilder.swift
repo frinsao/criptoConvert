@@ -9,8 +9,8 @@ import Foundation
 
 class HomeBuilder {
    func build() -> HomeView {
-       let dataSource = CoinDataSource(network: Network(baseURL: "https://api.coincap.io"))
-       let repository = CoinRepository(coinDataSource: dataSource)
+       let dataSource = CoinRemoteDataSource(network: Network(baseURL: "https://api.coincap.io"))
+       let repository = CoinRepository(coinRemoteDataSource: dataSource)
        let useCase = CoinUseCase(coinRepository: repository)
        let viewModel = HomeViewModel(coinUseCase: useCase)
        return HomeView(viewModel: viewModel)

@@ -9,8 +9,10 @@ import Foundation
 
 protocol HomeViewModelProtocol {
     var coins: [Coin] { get }
-    var firstSelectedToken: Coin { get set }
-    var secondSelectedToken: Coin { get set }
-    
+    var firstSelectedCoin: Coin? { get }
+    var secondSelectedCoin: Coin? { get }
+
     func fillCoins()
+    func updateFirstSelectedCoin(_ coin: Coin)
+    func updateSecondSelectedCoin(_ coin: Coin)
 }
