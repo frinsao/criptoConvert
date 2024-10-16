@@ -51,16 +51,16 @@ struct HomeView: View {
         RoundedRectangle(cornerRadius: 15)
             .overlay {
                 VStack(spacing: 12) {
-                    TokenSelectorView(tokens: viewModel.coins,
-                                      selectedToken: viewModel.firstSelectedCoin,
+                    TokenSelectorView(coins: viewModel.coins,
+                                      selectedCoin: viewModel.firstSelectedCoin,
                                       onChange: viewModel.updateFirstSelectedCoin(_:))
                         .frame(height: 80)
                     
                     switchTokensView
                         .frame(height: 50)
                     
-                    TokenSelectorView(tokens: viewModel.coins,
-                                      selectedToken: viewModel.secondSelectedCoin,
+                    TokenSelectorView(coins: viewModel.coins,
+                                      selectedCoin: viewModel.secondSelectedCoin,
                                       onChange: viewModel.updateSecondSelectedCoin(_:))
                         .frame(height: 80)
                 }

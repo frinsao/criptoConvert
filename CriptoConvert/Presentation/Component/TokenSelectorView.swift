@@ -14,9 +14,9 @@ struct TokenSelectorView: View {
     let onChange: (Coin) -> Void
     @State private var selectedCoinSymbol: String
 
-    init(coins: [Coin], selectedCoins: Coin?, onChange: @escaping (Coin) -> Void) {
+    init(coins: [Coin], selectedCoin: Coin?, onChange: @escaping (Coin) -> Void) {
         self.coins = coins
-        self.selectedCoin = selectedCoins
+        self.selectedCoin = selectedCoin
         self.onChange = onChange
         self.selectedCoinSymbol = selectedCoin?.symbol ?? ""
     }
@@ -88,5 +88,5 @@ struct TokenSelectorView: View {
 
 #Preview {
     let mock = CoinMock().getCoins()
-    TokenSelectorView(tokens: mock, selectedToken: mock[0], onChange: { _ in })
+    TokenSelectorView(coins: mock, selectedCoin: mock[0], onChange: { _ in })
 }
